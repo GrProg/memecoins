@@ -18,7 +18,7 @@ class PumpDumpClassifier:
     def __init__(self,
                  volatility_threshold: float = 0.4,    # Allow high initial volatility
                  min_trend_duration: int = 20,         # Minimum seconds for trend phase
-                 dump_threshold: float = 15,           # Minimum % drop for dump
+                 dump_threshold: float = 60,           # Minimum % drop for dump
                  max_market_cap: float = 68000):       # Maximum market cap to consider
         
         self.volatility_threshold = volatility_threshold

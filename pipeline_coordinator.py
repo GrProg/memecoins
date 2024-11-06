@@ -15,6 +15,7 @@ import logging
 from pathlib import Path
 import sys
 import time
+import shutil
 
 # Set up logging
 logging.basicConfig(
@@ -29,6 +30,7 @@ logging.basicConfig(
 class PumpPipelineCoordinator:
     def __init__(self):
         self.processed_tokens = set()
+        self.failed_tokens = set()  # Track tokens that failed processing
         self.ensure_directories()
         self.python_cmd = sys.executable
         
@@ -61,7 +63,7 @@ class PumpPipelineCoordinator:
         raise TimeoutError(f"Timeout waiting for file matching {pattern}")
 
     async def run_jupyter_script(self, token_address: str) -> bool:
-        """Run jupyter.py to fetch transaction data"""
+        """Run jupyter.py to fetch transaction data and save it"""
         try:
             logging.info(f"Starting transaction fetch for {token_address}")
             
@@ -78,6 +80,11 @@ class PumpPipelineCoordinator:
             stdout_text = stdout.decode() if stdout else ""
             stderr_text = stderr.decode() if stderr else ""
             
+            # Check for "No transactions found" in output
+            if "No transactions found" in stdout_text:
+                logging.warning(f"No transactions found for {token_address}")
+                return False
+            
             if process.returncode != 0:
                 logging.error(f"Error running jupyter.py: {stderr_text}")
                 return False
@@ -88,6 +95,12 @@ class PumpPipelineCoordinator:
             try:
                 tx_file = await self.wait_for_file(f'all_transactions_{token_address[:8]}*.json')
                 logging.info(f"Found and verified transaction file: {tx_file}")
+                
+                # Move the file to the 'all' directory
+                new_filename = f"all/transactions_{token_address}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+                shutil.move(str(tx_file), new_filename)
+                logging.info(f"Moved transaction file to {new_filename}")
+                
                 return True
             except TimeoutError:
                 logging.error("Timeout waiting for transaction file to be written")
@@ -96,65 +109,20 @@ class PumpPipelineCoordinator:
         except Exception as e:
             logging.error(f"Exception running jupyter.py: {str(e)}")
             return False
-            
-    async def run_analysis_script(self, token_address: str) -> bool:
-        """Run tryv2.py to analyze transaction data"""
-        try:
-            logging.info(f"Starting analysis for {token_address}")
-            
-            # Find and verify the transaction file
-            try:
-                tx_file = await self.wait_for_file(f'all_transactions_{token_address[:8]}*.json', timeout=30)
-            except TimeoutError:
-                logging.error(f"No transaction file found for {token_address}")
-                return False
-                
-            # Run tryv2.py with the transaction file as argument
-            process = await asyncio.create_subprocess_shell(
-                f'"{self.python_cmd}" tryv2.py "{tx_file}"',
-                stdout=asyncio.subprocess.PIPE,
-                stderr=asyncio.subprocess.PIPE
-            )
-            
-            stdout, stderr = await process.communicate()
-            
-            if process.returncode != 0:
-                logging.error(f"Error running tryv2.py: {stderr.decode() if stderr else 'Unknown error'}")
-                return False
-            
-            # Wait for the analysis result file
-            try:
-                await self.wait_for_file('price_history_simple.json', timeout=30)
-            except TimeoutError:
-                logging.error("Timeout waiting for analysis results file")
-                return False
-                
-            # Move result file to all/ directory
-            result_file = 'price_history_simple.json'
-            if os.path.exists(result_file):
-                new_filename = f"all/price_history_{token_address}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-                os.rename(result_file, new_filename)
-                logging.info(f"Moved analysis results to {new_filename}")
-                
-            # Cleanup transaction json
-            tx_file.unlink()
-            logging.info(f"Cleaned up {tx_file}")
-                
-            return True
-            
-        except Exception as e:
-            logging.error(f"Exception running tryv2.py: {str(e)}")
-            return False
 
     async def process_pump(self, pump_data: dict) -> bool:
-        """Process a single pump completely"""
+        """Process a single pump by running jupyter.py and saving the output"""
         token_address = pump_data['token']
         
         if token_address in self.processed_tokens:
             logging.info(f"Token {token_address} already processed, skipping")
             return True
             
-        logging.info(f"Starting complete processing for {token_address}")
+        if token_address in self.failed_tokens:
+            logging.info(f"Token {token_address} previously failed, skipping")
+            return False
+            
+        logging.info(f"Starting processing for {token_address}")
         
         # Wait 15 minutes from pump detection
         pump_time = datetime.fromisoformat(pump_data['timestamp'])
@@ -166,48 +134,74 @@ class PumpPipelineCoordinator:
             logging.info(f"Waiting {delay:.0f} seconds before processing {token_address}")
             await asyncio.sleep(delay)
         
-        # Run the complete analysis pipeline
-        if await self.run_jupyter_script(token_address):
-            if await self.run_analysis_script(token_address):
-                logging.info(f"Completed processing for {token_address}")
-                self.processed_tokens.add(token_address)
-                return True
-            else:
-                logging.error(f"Failed analysis for {token_address}")
-                return False
+        # Run jupyter.py and save the output
+        success = await self.run_jupyter_script(token_address)
+        
+        if success:
+            logging.info(f"Completed processing for {token_address}")
+            self.processed_tokens.add(token_address)
+            return True
         else:
-            logging.error(f"Failed transaction fetch for {token_address}")
+            logging.warning(f"Failed processing for {token_address}, will skip in future runs")
+            self.failed_tokens.add(token_address)
             return False
+
+    def read_pump_file(self, pump_file: str) -> list:
+        """Read and parse pump file, handling errors for individual lines"""
+        pumps = []
+        if os.path.exists(pump_file):
+            with open(pump_file, 'r') as f:
+                for line in f:
+                    try:
+                        pump_data = json.loads(line.strip())
+                        pumps.append(pump_data)
+                    except json.JSONDecodeError:
+                        logging.error(f"Error parsing JSON line: {line.strip()}")
+                        continue
+        return pumps
 
     async def process_pumps_sequentially(self):
         """Process all pumps from the file one by one"""
+        last_processed_time = datetime.min
+        
         while True:
             try:
                 pump_file = self.get_current_pump_file()
+                
+                # If pump file doesn't exist, wait and continue
                 if not os.path.exists(pump_file):
                     logging.info(f"Waiting for pump file {pump_file}")
                     await asyncio.sleep(5)
                     continue
                 
                 # Read all pumps from file
-                with open(pump_file, 'r') as f:
-                    lines = f.readlines()
+                current_pumps = self.read_pump_file(pump_file)
                 
-                # Process each pump sequentially
-                for line in lines:
-                    try:
-                        pump_data = json.loads(line.strip())
-                        await self.process_pump(pump_data)
-                    except json.JSONDecodeError:
-                        logging.error(f"Error parsing JSON line: {line.strip()}")
+                # Sort pumps by timestamp
+                current_pumps.sort(key=lambda x: datetime.fromisoformat(x['timestamp']))
+                
+                # Process each pump that hasn't been processed yet
+                any_processed = False
+                for pump_data in current_pumps:
+                    pump_time = datetime.fromisoformat(pump_data['timestamp'])
+                    
+                    # Skip if we've already processed this time period
+                    if pump_time <= last_processed_time:
                         continue
+                    
+                    await self.process_pump(pump_data)
+                    last_processed_time = pump_time
+                    any_processed = True
                 
-                # Wait before checking for new pumps
-                await asyncio.sleep(5)
+                # If no pumps were processed, wait longer before next check
+                if not any_processed:
+                    await asyncio.sleep(30)  # Wait 30 seconds before checking for new pumps
+                else:
+                    await asyncio.sleep(5)  # Short wait between processing pumps
                 
             except Exception as e:
-                logging.error(f"Error in pump processing: {str(e)}")
-                await asyncio.sleep(5)
+                logging.error(f"Error in pump processing loop: {str(e)}")
+                await asyncio.sleep(30)  # Wait longer after errors
 
 async def main():
     coordinator = PumpPipelineCoordinator()

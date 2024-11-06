@@ -1,0 +1,284 @@
+{
+  "timestamp": "2024-11-04 07:57:27",
+  "metrics": {
+    "time_model_metrics": {
+      "mse": 999983.6451464985,
+      "rmse": 999.9918225398138,
+      "mape": 683.3885219289994,
+      "r2": -0.13973024752232166
+    },
+    "mcap_model_metrics": {
+      "mse": 1247264201.8948002,
+      "rmse": 35316.62783866546,
+      "mape": 73.02324619177406,
+      "r2": 0.30034955750176073
+    },
+    "feature_importance": {
+      "time_model": [
+        {
+          "feature": "current_price",
+          "importance": 209
+        },
+        {
+          "feature": "total_sol_volume",
+          "importance": 80
+        },
+        {
+          "feature": "price_momentum",
+          "importance": 77
+        },
+        {
+          "feature": "avg_sol_per_tx",
+          "importance": 76
+        },
+        {
+          "feature": "avg_calls_per_program",
+          "importance": 70
+        },
+        {
+          "feature": "sol_flow_volatility",
+          "importance": 64
+        },
+        {
+          "feature": "volume_momentum",
+          "importance": 60
+        },
+        {
+          "feature": "price_acceleration",
+          "importance": 57
+        },
+        {
+          "feature": "unique_programs",
+          "importance": 57
+        },
+        {
+          "feature": "total_program_calls",
+          "importance": 54
+        },
+        {
+          "feature": "sol_tx_count",
+          "importance": 51
+        },
+        {
+          "feature": "current_mcap",
+          "importance": 49
+        },
+        {
+          "feature": "volume_acceleration",
+          "importance": 45
+        },
+        {
+          "feature": "avg_interactions_per_account",
+          "importance": 43
+        },
+        {
+          "feature": "transfer_count",
+          "importance": 38
+        },
+        {
+          "feature": "max_account_interactions",
+          "importance": 37
+        },
+        {
+          "feature": "interaction_concentration",
+          "importance": 31
+        },
+        {
+          "feature": "unique_accounts",
+          "importance": 23
+        },
+        {
+          "feature": "tx_density",
+          "importance": 16
+        },
+        {
+          "feature": "valid_price_points",
+          "importance": 0
+        },
+        {
+          "feature": "mcap_volatility",
+          "importance": 0
+        },
+        {
+          "feature": "price_volatility",
+          "importance": 0
+        },
+        {
+          "feature": "price_change",
+          "importance": 0
+        },
+        {
+          "feature": "mcap_change",
+          "importance": 0
+        }
+      ],
+      "mcap_model": [
+        {
+          "feature": "current_price",
+          "importance": 213
+        },
+        {
+          "feature": "avg_calls_per_program",
+          "importance": 94
+        },
+        {
+          "feature": "price_momentum",
+          "importance": 85
+        },
+        {
+          "feature": "sol_flow_volatility",
+          "importance": 78
+        },
+        {
+          "feature": "avg_sol_per_tx",
+          "importance": 75
+        },
+        {
+          "feature": "price_acceleration",
+          "importance": 67
+        },
+        {
+          "feature": "total_sol_volume",
+          "importance": 63
+        },
+        {
+          "feature": "volume_acceleration",
+          "importance": 50
+        },
+        {
+          "feature": "volume_momentum",
+          "importance": 49
+        },
+        {
+          "feature": "avg_interactions_per_account",
+          "importance": 49
+        },
+        {
+          "feature": "sol_tx_count",
+          "importance": 48
+        },
+        {
+          "feature": "interaction_concentration",
+          "importance": 44
+        },
+        {
+          "feature": "current_mcap",
+          "importance": 38
+        },
+        {
+          "feature": "transfer_count",
+          "importance": 33
+        },
+        {
+          "feature": "unique_programs",
+          "importance": 33
+        },
+        {
+          "feature": "unique_accounts",
+          "importance": 28
+        },
+        {
+          "feature": "max_account_interactions",
+          "importance": 27
+        },
+        {
+          "feature": "total_program_calls",
+          "importance": 27
+        },
+        {
+          "feature": "tx_density",
+          "importance": 10
+        },
+        {
+          "feature": "price_change",
+          "importance": 2
+        },
+        {
+          "feature": "mcap_volatility",
+          "importance": 0
+        },
+        {
+          "feature": "price_volatility",
+          "importance": 0
+        },
+        {
+          "feature": "valid_price_points",
+          "importance": 0
+        },
+        {
+          "feature": "mcap_change",
+          "importance": 0
+        }
+      ]
+    },
+    "training_size": 200,
+    "test_size": 51,
+    "feature_count": 24
+  },
+  "training_log": [
+    "[2024-11-04 07:57:24] Starting training process",
+    "[2024-11-04 07:57:24] Processing 33 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 262 dump events",
+    "[2024-11-04 07:57:25] Processing 36 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 341 dump events",
+    "[2024-11-04 07:57:25] Processing 13 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 28 dump events",
+    "[2024-11-04 07:57:25] Processing 22 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 139 dump events",
+    "[2024-11-04 07:57:25] Processing 7 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 0 dump events",
+    "[2024-11-04 07:57:25] Processing 81 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 296 dump events",
+    "[2024-11-04 07:57:25] Processing 24 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 104 dump events",
+    "[2024-11-04 07:57:25] Processing 20 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 128 dump events",
+    "[2024-11-04 07:57:25] Processing 25 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 0 dump events",
+    "[2024-11-04 07:57:25] Processing 26 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 0 dump events",
+    "[2024-11-04 07:57:25] Processing 12 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 123 dump events",
+    "[2024-11-04 07:57:25] Processing 85 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 217 dump events",
+    "[2024-11-04 07:57:25] Processing 8 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 0 dump events",
+    "[2024-11-04 07:57:25] Processing 29 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 164 dump events",
+    "[2024-11-04 07:57:25] Processing 28 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 120 dump events",
+    "[2024-11-04 07:57:25] Processing 11 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 28 dump events",
+    "[2024-11-04 07:57:25] Processing 10 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 0 dump events",
+    "[2024-11-04 07:57:25] Processing 32 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 227 dump events",
+    "[2024-11-04 07:57:25] Processing 10 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 12 dump events",
+    "[2024-11-04 07:57:25] Processing 19 windows of data",
+    "[2024-11-04 07:57:25] Analyzing price data for dumps (threshold: -0.15, window: 60)",
+    "[2024-11-04 07:57:25] Found 0 dump events",
+    "[2024-11-04 07:57:25] Total training samples: 251",
+    "[2024-11-04 07:57:25] Training time prediction model",
+    "[2024-11-04 07:57:26] Training pre-dump market cap prediction model"
+  ]
+}

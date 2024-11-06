@@ -1,0 +1,154 @@
+2024-11-04 07:57:24,515 - INFO - Starting model training process
+2024-11-04 07:57:24,516 - INFO - Output directory: training_results
+2024-11-04 07:57:24,516 - INFO - Model will be saved to: dump_predictor_model.joblib
+2024-11-04 07:57:24,517 - INFO - Found 20 potential training files
+2024-11-04 07:57:24,518 - INFO - 
+Processing pair 1/20:
+2024-11-04 07:57:24,518 - INFO - Enhanced: enhanced_1AYfkEgbjZQTn7DoUHxT1oDHZEUKd7JSwwXFvmGGTMi_20241028_235115.json
+2024-11-04 07:57:24,519 - INFO - Price: price_history_1AYfkEgbjZQTn7DoUHxT1oDHZEUKd7JSwwXFvmGGTMi_20241028_235115.json
+2024-11-04 07:57:24,523 - INFO - Enhanced data entries: 33
+2024-11-04 07:57:24,523 - INFO - Price data entries: 436
+2024-11-04 07:57:24,531 - INFO - 
+Processing pair 2/20:
+2024-11-04 07:57:24,534 - INFO - Enhanced: enhanced_2s5JVDLc9EKwxEc41uLWKSsRcnq4qG9JAMmngBuJZXLD_20241029_094838.json
+2024-11-04 07:57:24,537 - INFO - Price: price_history_2s5JVDLc9EKwxEc41uLWKSsRcnq4qG9JAMmngBuJZXLD_20241029_094838.json
+2024-11-04 07:57:24,546 - INFO - Enhanced data entries: 36
+2024-11-04 07:57:24,550 - INFO - Price data entries: 433
+2024-11-04 07:57:24,563 - INFO - 
+Processing pair 3/20:
+2024-11-04 07:57:24,564 - INFO - Enhanced: enhanced_3JH1FWSocCovVAAfMBsQxSUBLLozBicDZ9tBzfvzB7eb_20241103_044802.json
+2024-11-04 07:57:24,567 - INFO - Price: price_history_3JH1FWSocCovVAAfMBsQxSUBLLozBicDZ9tBzfvzB7eb_20241103_044802.json
+2024-11-04 07:57:24,569 - INFO - Enhanced data entries: 13
+2024-11-04 07:57:24,570 - INFO - Price data entries: 90
+2024-11-04 07:57:24,584 - INFO - 
+Processing pair 4/20:
+2024-11-04 07:57:24,585 - INFO - Enhanced: enhanced_3S3p5S9VPwAxGWrKh4QGbDxnfbPdyrbLTXGUX8McdnSj_20241029_104142.json
+2024-11-04 07:57:24,585 - INFO - Price: price_history_3S3p5S9VPwAxGWrKh4QGbDxnfbPdyrbLTXGUX8McdnSj_20241029_104142.json
+2024-11-04 07:57:24,591 - INFO - Enhanced data entries: 22
+2024-11-04 07:57:24,592 - INFO - Price data entries: 235
+2024-11-04 07:57:24,603 - INFO - 
+Processing pair 5/20:
+2024-11-04 07:57:24,605 - INFO - Enhanced: enhanced_47aJcJx9Chumq3JJUER8ss3dqaBuYaj6yPVxtdwvpump_20241103_044802.json
+2024-11-04 07:57:24,605 - INFO - Price: price_history_47aJcJx9Chumq3JJUER8ss3dqaBuYaj6yPVxtdwvpump_20241103_044802.json
+2024-11-04 07:57:24,608 - INFO - Enhanced data entries: 7
+2024-11-04 07:57:24,609 - INFO - Price data entries: 19
+2024-11-04 07:57:24,618 - INFO - 
+Processing pair 6/20:
+2024-11-04 07:57:24,621 - INFO - Enhanced: enhanced_4e9ZvSsxzXB49EVJR1vHJqZj3UuzL8nqWbmk1yScpump_20241029_100316.json
+2024-11-04 07:57:24,622 - INFO - Price: price_history_4e9ZvSsxzXB49EVJR1vHJqZj3UuzL8nqWbmk1yScpump_20241029_100316.json
+2024-11-04 07:57:24,628 - INFO - Enhanced data entries: 81
+2024-11-04 07:57:24,633 - INFO - Price data entries: 385
+2024-11-04 07:57:24,646 - INFO - 
+Processing pair 7/20:
+2024-11-04 07:57:24,646 - INFO - Enhanced: enhanced_4iksgnPfVeAsG1UeovNNiuJTLvhJV8cXm97rPsDdpump_20241029_093616.json
+2024-11-04 07:57:24,650 - INFO - Price: price_history_4iksgnPfVeAsG1UeovNNiuJTLvhJV8cXm97rPsDdpump_20241029_093616.json
+2024-11-04 07:57:24,655 - INFO - Enhanced data entries: 24
+2024-11-04 07:57:24,660 - INFO - Price data entries: 168
+2024-11-04 07:57:24,675 - INFO - 
+Processing pair 8/20:
+2024-11-04 07:57:24,675 - INFO - Enhanced: enhanced_4JY6Lep57Edxr7X2BmrnhNBRLaCfRvZM7JJ84kqmHxBH_20241029_091725.json
+2024-11-04 07:57:24,675 - INFO - Price: price_history_4JY6Lep57Edxr7X2BmrnhNBRLaCfRvZM7JJ84kqmHxBH_20241029_091725.json
+2024-11-04 07:57:24,679 - INFO - Enhanced data entries: 20
+2024-11-04 07:57:24,680 - INFO - Price data entries: 224
+2024-11-04 07:57:24,693 - INFO - 
+Processing pair 9/20:
+2024-11-04 07:57:24,694 - INFO - Enhanced: enhanced_4N8DbwFi8BeBdtp5xiMUidD7yBQ55CNEsmW2rskMpump_20241029_094752.json
+2024-11-04 07:57:24,696 - INFO - Price: price_history_4N8DbwFi8BeBdtp5xiMUidD7yBQ55CNEsmW2rskMpump_20241029_094752.json
+2024-11-04 07:57:24,700 - INFO - Enhanced data entries: 25
+2024-11-04 07:57:24,701 - INFO - Price data entries: 46
+2024-11-04 07:57:24,713 - INFO - 
+Processing pair 10/20:
+2024-11-04 07:57:24,714 - INFO - Enhanced: enhanced_4YVaFyrwzGempLaTaxKiygk6fMjjJD3gMhncJkaHpump_20241028_234005.json
+2024-11-04 07:57:24,714 - INFO - Price: price_history_4YVaFyrwzGempLaTaxKiygk6fMjjJD3gMhncJkaHpump_20241028_234005.json
+2024-11-04 07:57:24,721 - INFO - Enhanced data entries: 26
+2024-11-04 07:57:24,721 - INFO - Price data entries: 53
+2024-11-04 07:57:24,731 - INFO - 
+Processing pair 11/20:
+2024-11-04 07:57:24,734 - INFO - Enhanced: enhanced_6oMRnLTKnLvXCh3WYA4eeKd6E3q8ioTkuEXkR98pump_20241103_044803.json
+2024-11-04 07:57:24,734 - INFO - Price: price_history_6oMRnLTKnLvXCh3WYA4eeKd6E3q8ioTkuEXkR98pump_20241103_044803.json
+2024-11-04 07:57:24,739 - INFO - Enhanced data entries: 12
+2024-11-04 07:57:24,743 - INFO - Price data entries: 185
+2024-11-04 07:57:24,759 - INFO - 
+Processing pair 12/20:
+2024-11-04 07:57:24,759 - INFO - Enhanced: enhanced_7FaUbpMzefuqapBQDb8vaSSgdh564PUQf87ANdSRpump_20241029_103803.json
+2024-11-04 07:57:24,760 - INFO - Price: price_history_7FaUbpMzefuqapBQDb8vaSSgdh564PUQf87ANdSRpump_20241029_103803.json
+2024-11-04 07:57:24,769 - INFO - Enhanced data entries: 85
+2024-11-04 07:57:24,769 - INFO - Price data entries: 328
+2024-11-04 07:57:24,784 - INFO - 
+Processing pair 13/20:
+2024-11-04 07:57:24,785 - INFO - Enhanced: enhanced_7hn8Zs3yCxE4ucyNyyVFfy3Y2UN5KSDYuZC3pCoTpump_20241102_234127.json
+2024-11-04 07:57:24,787 - INFO - Price: price_history_7hn8Zs3yCxE4ucyNyyVFfy3Y2UN5KSDYuZC3pCoTpump_20241102_234127.json
+2024-11-04 07:57:24,795 - INFO - Enhanced data entries: 8
+2024-11-04 07:57:24,796 - INFO - Price data entries: 21
+2024-11-04 07:57:24,805 - INFO - 
+Processing pair 14/20:
+2024-11-04 07:57:24,808 - INFO - Enhanced: enhanced_8U4SVP8s7QoStRFncoSuKxQeQ9RsaHVgXzGKc7BrRX3Z_20241029_090349.json
+2024-11-04 07:57:24,809 - INFO - Price: price_history_8U4SVP8s7QoStRFncoSuKxQeQ9RsaHVgXzGKc7BrRX3Z_20241029_090349.json
+2024-11-04 07:57:24,814 - INFO - Enhanced data entries: 29
+2024-11-04 07:57:24,816 - INFO - Price data entries: 225
+2024-11-04 07:57:24,830 - INFO - 
+Processing pair 15/20:
+2024-11-04 07:57:24,830 - INFO - Enhanced: enhanced_9DVCxF84BRzeDYMftcRr9aAaFH7mveFFvSS9WXEspump_20241029_092658.json
+2024-11-04 07:57:24,831 - INFO - Price: price_history_9DVCxF84BRzeDYMftcRr9aAaFH7mveFFvSS9WXEspump_20241029_092658.json
+2024-11-04 07:57:24,835 - INFO - Enhanced data entries: 28
+2024-11-04 07:57:24,838 - INFO - Price data entries: 188
+2024-11-04 07:57:24,851 - INFO - 
+Processing pair 16/20:
+2024-11-04 07:57:24,853 - INFO - Enhanced: enhanced_9LJAmLvxQskx6uT93TSREhXAW7hRS5uzo18JSbD33vK4_20241103_044805.json
+2024-11-04 07:57:24,855 - INFO - Price: price_history_9LJAmLvxQskx6uT93TSREhXAW7hRS5uzo18JSbD33vK4_20241103_044805.json
+2024-11-04 07:57:24,856 - INFO - Enhanced data entries: 11
+2024-11-04 07:57:24,859 - INFO - Price data entries: 88
+2024-11-04 07:57:24,905 - INFO - 
+Processing pair 17/20:
+2024-11-04 07:57:24,906 - INFO - Enhanced: enhanced_CXZURrQoiUeWsaxZWMdccEMLZYHcA4wwPPUzfcc4TcBT_20241103_044807.json
+2024-11-04 07:57:24,906 - INFO - Price: price_history_CXZURrQoiUeWsaxZWMdccEMLZYHcA4wwPPUzfcc4TcBT_20241103_044807.json
+2024-11-04 07:57:24,910 - INFO - Enhanced data entries: 10
+2024-11-04 07:57:24,912 - INFO - Price data entries: 58
+2024-11-04 07:57:24,930 - INFO - 
+Processing pair 18/20:
+2024-11-04 07:57:24,933 - INFO - Enhanced: enhanced_Dc6CzgGtvPS96henxfdmuugxcZQNKtXQskEiLsEGq9GN_20241028_233850.json
+2024-11-04 07:57:24,934 - INFO - Price: price_history_Dc6CzgGtvPS96henxfdmuugxcZQNKtXQskEiLsEGq9GN_20241028_233850.json
+2024-11-04 07:57:24,939 - INFO - Enhanced data entries: 32
+2024-11-04 07:57:24,939 - INFO - Price data entries: 319
+2024-11-04 07:57:24,951 - INFO - 
+Processing pair 19/20:
+2024-11-04 07:57:24,954 - INFO - Enhanced: enhanced_FN8kNNeDip6rdfwBau21Gw1AoQcMSPhti5nNKKNn5rTf_20241103_044809.json
+2024-11-04 07:57:24,956 - INFO - Price: price_history_FN8kNNeDip6rdfwBau21Gw1AoQcMSPhti5nNKKNn5rTf_20241103_044809.json
+2024-11-04 07:57:24,958 - INFO - Enhanced data entries: 10
+2024-11-04 07:57:24,960 - INFO - Price data entries: 72
+2024-11-04 07:57:24,969 - INFO - 
+Processing pair 20/20:
+2024-11-04 07:57:24,972 - INFO - Enhanced: enhanced_HaksQuw1dk5MRJc4UR9VCNyhs2n3Lrzw7zmg3Topump_20241102_101448.json
+2024-11-04 07:57:24,972 - INFO - Price: price_history_HaksQuw1dk5MRJc4UR9VCNyhs2n3Lrzw7zmg3Topump_20241102_101448.json
+2024-11-04 07:57:24,980 - INFO - Enhanced data entries: 19
+2024-11-04 07:57:24,981 - INFO - Price data entries: 53
+2024-11-04 07:57:24,991 - INFO - 
+Successfully loaded 20 data pairs
+2024-11-04 07:57:27,197 - INFO - 
+Model trained and saved to dump_predictor_model.joblib
+2024-11-04 07:57:27,198 - INFO - Training results and visualizations saved to training_results
+2024-11-04 07:57:27,198 - INFO - 
+Training Results Summary:
+2024-11-04 07:57:27,199 - INFO - Time Model Performance:
+2024-11-04 07:57:27,199 - INFO -   RMSE: 999.99 seconds
+2024-11-04 07:57:27,200 - INFO -   MAPE: 683.39%
+2024-11-04 07:57:27,201 - INFO -   R²: -0.140
+2024-11-04 07:57:27,202 - INFO - 
+Pre-Dump Market Cap Model Performance:
+2024-11-04 07:57:27,203 - INFO -   RMSE: 35316.63 USD
+2024-11-04 07:57:27,203 - INFO -   MAPE: 73.02%
+2024-11-04 07:57:27,203 - INFO -   R²: 0.300
+2024-11-04 07:57:27,203 - INFO - 
+Top 5 Important Features for Time Prediction:
+2024-11-04 07:57:27,204 - INFO -   current_price: 209.0000
+2024-11-04 07:57:27,204 - INFO -   total_sol_volume: 80.0000
+2024-11-04 07:57:27,206 - INFO -   price_momentum: 77.0000
+2024-11-04 07:57:27,207 - INFO -   avg_sol_per_tx: 76.0000
+2024-11-04 07:57:27,207 - INFO -   avg_calls_per_program: 70.0000
+2024-11-04 07:57:27,208 - INFO - 
+Top 5 Important Features for MCap Prediction:
+2024-11-04 07:57:27,208 - INFO -   current_price: 213.0000
+2024-11-04 07:57:27,208 - INFO -   avg_calls_per_program: 94.0000
+2024-11-04 07:57:27,209 - INFO -   price_momentum: 85.0000
+2024-11-04 07:57:27,209 - INFO -   sol_flow_volatility: 78.0000
+2024-11-04 07:57:27,209 - INFO -   avg_sol_per_tx: 75.0000

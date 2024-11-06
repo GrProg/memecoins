@@ -1,3 +1,12 @@
+# © 2024 Aristotle University of Thessaloniki, Greece Chariton Keramarakis
+# All Rights Reserved.
+# 
+# This code is proprietary and confidential. It is licensed only for non-commercial, academic use 
+# at Aristotle University of Thessaloniki, or with express written permission from the author. 
+# Unauthorized copying, modification, or distribution of this code is strictly prohibited.
+# 
+# Licensed under the Custom License Agreement for Non-Commercial Academic Use.
+# See the LICENSE file for details.
 import asyncio
 import websockets
 import json
