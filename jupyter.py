@@ -7,22 +7,24 @@
 # 
 # Licensed under the Custom License Agreement for Non-Commercial Academic Use.
 # See the LICENSE file for details.
+
 import requests
 from datetime import datetime
 import json
 from typing import List, Optional
 import time
 import sys
+import os
 
 HELIUS_API_KEY = "30b8e7e2-9206-41ca-a392-112845774aef"
 
-def get_all_token_transactions(token_address: str, max_transactions: int = 800) -> Optional[List[dict]]:
+def get_all_token_transactions(token_address: str, max_transactions: int = 950) -> Optional[List[dict]]:
     """
     Fetches transactions for a token up to a maximum limit.
     
     Args:
         token_address: The Solana token address to fetch transactions for
-        max_transactions: Maximum number of transactions to fetch (default: 800)
+        max_transactions: Maximum number of transactions to fetch (default: 950)
     
     Returns:
         List of transactions or None if an error occurs
@@ -124,7 +126,12 @@ def get_all_token_transactions(token_address: str, max_transactions: int = 800) 
         
     # Save all transactions to file
     try:
-        filename = f"all_transactions_{token_address[:8]}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        # Create 'all' folder if it doesn't exist
+        os.makedirs('all', exist_ok=True)
+        
+        # New filename format
+        filename = f"all/transactions_{token_address}.json"
+        
         with open(filename, 'w') as f:
             json.dump(all_transactions, f, indent=2)
         print(f"All transactions saved to {filename}")
