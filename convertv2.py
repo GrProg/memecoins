@@ -9,7 +9,7 @@ import re
 import glob
 
 class HeliusTransformerV2:
-    def __init__(self, sol_price: float = 189.0, window_seconds: int = 10):
+    def __init__(self, sol_price: float = 200.0, window_seconds: int = 10):
         self.sol_price = sol_price
         self.window_seconds = window_seconds
         self.total_supply = 1_000_000_000
@@ -124,18 +124,18 @@ class HeliusTransformerV2:
         """Calculate price metrics for a time window with zero handling"""
         prices = []
         mcaps = []
-        
+
         for tx in transactions:
             if 'tokenTransfers' in tx and tx['tokenTransfers']:
                 token_amount = self._get_token_amount(tx)
                 sol_amount = self._get_sol_amount(tx)
-                
+
                 if token_amount > 0:  # Only calculate price if token amount is non-zero
                     price = sol_amount / token_amount
                     prices.append(price)
                     mcap = price * self.sol_price * self.total_supply
                     mcaps.append(mcap)
-        
+
         # Handle empty price lists
         if not prices:
             return {
@@ -148,11 +148,11 @@ class HeliusTransformerV2:
                 'valid_price_points': 0,
                 'valid_mcap_points': 0
             }
-    
+
         # Calculate metrics only if we have valid prices
         price_change = ((prices[-1] - prices[0]) / prices[0] * 100) if len(prices) > 1 and prices[0] != 0 else 0
         mcap_change = ((mcaps[-1] - mcaps[0]) / mcaps[0] * 100) if len(mcaps) > 1 and mcaps[0] != 0 else 0
-        
+
         return {
             'price_start': prices[0],
             'price_end': prices[-1],
@@ -321,41 +321,84 @@ def convert_helius_data_v2(input_dir: str = 'all', output_dir: str = 'yes'):
             continue
 
         print(f"\nProcessing {filename}...")
+        file_path = os.path.join(input_dir, filename)
 
         try:
-            # Extract token address from filename
-            original_address = filename.split('_')[1].split('.')[0]
-
-            # Read input file
-            with open(os.path.join(input_dir, filename), 'r') as f:
-                transactions = json.load(f)
-
-            # Transform data using the original address
-            price_history, enhanced_data = transformer.transform_helius_data(transactions, original_address)
-
-            if not price_history and not enhanced_data:
-                print(f"No data extracted from {filename}")
+            # Check if file is empty
+            if os.path.getsize(file_path) == 0:
+                print(f"Skipping empty file: {filename}")
                 continue
 
-            # Clean and sort price history data
-            cleaned_price_history, max_market_cap = clean_transaction_data(price_history)
-            cleaned_price_history.sort(key=lambda x: x['timestamp'])
+            # Read input file with error handling
+            try:
+                with open(file_path, 'r') as f:
+                    file_content = f.read().strip()
+                    if not file_content:
+                        print(f"Empty content in file: {filename}")
+                        continue
+                    transactions = json.loads(file_content)
+            except json.JSONDecodeError as e:
+                print(f"Invalid JSON in file {filename}: {str(e)}")
+                continue
+            except Exception as e:
+                print(f"Error reading file {filename}: {str(e)}")
+                continue
 
-            # Generate output filenames using the original address and max market cap
-            price_filename = f"price_history_{original_address}_{int(max_market_cap)}.json"
-            enhanced_filename = f"enhanced_{original_address}_{int(max_market_cap)}.json"
+            # Validate transactions data
+            if not isinstance(transactions, list):
+                print(f"Invalid data format in {filename} - expected list of transactions")
+                continue
 
-            # Save converted data
-            with open(os.path.join(output_dir, price_filename), 'w') as f:
-                json.dump(cleaned_price_history, f, indent=2)
+            if not transactions:
+                print(f"No transactions found in {filename}")
+                continue
 
-            with open(os.path.join(output_dir, enhanced_filename), 'w') as f:
-                json.dump(enhanced_data, f, indent=2)
+            # Extract token address from filename
+            try:
+                original_address = filename.split('_')[1].split('.')[0]
+            except IndexError:
+                print(f"Invalid filename format: {filename}")
+                continue
 
-            print(f"Created {price_filename} and {enhanced_filename}")
+            # Transform data using the original address
+            try:
+                price_history, enhanced_data = transformer.transform_helius_data(transactions, original_address)
+                
+                if not price_history and not enhanced_data:
+                    print(f"No valid data extracted from {filename}")
+                    continue
+
+                # Clean and sort price history data
+                cleaned_price_history, max_market_cap = clean_transaction_data(price_history)
+                if not cleaned_price_history:
+                    print(f"No valid transactions after cleaning in {filename}")
+                    continue
+
+                cleaned_price_history.sort(key=lambda x: x['timestamp'])
+
+                # Generate output filenames using the original address and max market cap
+                price_filename = f"price_history_{original_address}_{int(max_market_cap)}.json"
+                enhanced_filename = f"enhanced_{original_address}_{int(max_market_cap)}.json"
+
+                # Save converted data
+                output_price_path = os.path.join(output_dir, price_filename)
+                output_enhanced_path = os.path.join(output_dir, enhanced_filename)
+
+                with open(output_price_path, 'w') as f:
+                    json.dump(cleaned_price_history, f, indent=2)
+
+                with open(output_enhanced_path, 'w') as f:
+                    json.dump(enhanced_data, f, indent=2)
+
+                print(f"Created {price_filename} and {enhanced_filename}")
+
+            except Exception as e:
+                print(f"Error transforming data for {filename}: {str(e)}")
+                traceback.print_exc()
+                continue
 
         except Exception as e:
-            print(f"Error processing {filename}: {str(e)}")
+            print(f"Unexpected error processing {filename}: {str(e)}")
             traceback.print_exc()
             continue
 
@@ -363,12 +406,18 @@ def convert_helius_data_v2(input_dir: str = 'all', output_dir: str = 'yes'):
 
 if __name__ == "__main__":
     import argparse
+    import traceback
 
     parser = argparse.ArgumentParser(description='Convert Helius transaction data (V2)')
     parser.add_argument('--input', default='all', help='Input directory containing raw transaction files')
-    parser.add_argument('--output', default='pameligo/PredYes', help='Output directory for converted files')
+    parser.add_argument('--output', default='testt/yes', help='Output directory for converted files')
 
     args = parser.parse_args()
 
     print(f"Converting files from {args.input} to {args.output}")
-    convert_helius_data_v2(args.input, args.output)
+    try:
+        convert_helius_data_v2(args.input, args.output)
+    except Exception as e:
+        print(f"Fatal error during conversion: {str(e)}")
+        traceback.print_exc()
+        sys.exit(1)
