@@ -9,7 +9,7 @@ import re
 import glob
 
 class HeliusTransformerV2:
-    def __init__(self, sol_price: float = 200.0, window_seconds: int = 10):
+    def __init__(self, sol_price: float = 220.0, window_seconds: int = 10):
         self.sol_price = sol_price
         self.window_seconds = window_seconds
         self.total_supply = 1_000_000_000
@@ -44,7 +44,7 @@ class HeliusTransformerV2:
 
         return windows
 
-    def transform_helius_data(self, transactions: List[Dict[str, Any]], original_address: str) -> tuple:
+    def transform_helius_data(self, transactions: List[Dict[str, Any]], token_address: str) -> tuple:
         """Transform Helius transaction data into price history and enhanced metrics"""
         if not transactions:
             return [], []
@@ -53,7 +53,7 @@ class HeliusTransformerV2:
         sorted_txs = sorted(transactions, key=lambda x: x['timestamp'])
 
         # Generate price history for all transactions
-        price_history = self._generate_price_history(sorted_txs)
+        price_history = self._generate_price_history(sorted_txs, token_address)
 
         # Generate enhanced data by time windows
         enhanced_data = []
@@ -78,21 +78,36 @@ class HeliusTransformerV2:
 
         return price_history, enhanced_data
 
-    def _generate_price_history(self, transactions: List[Dict]) -> List[Dict]:
-        """Generate price history for all transactions"""
+    def _generate_price_history(self, transactions: List[Dict], target_token: str) -> List[Dict]:
+        """Generate price history for all transactions of the target token"""
         price_history = []
         for tx in transactions:
-            token_amount = self._get_token_amount(tx)
+            # Extract only transfers of our target token
+            target_transfers = []
+            if 'tokenTransfers' in tx:
+                target_transfers = [
+                    transfer for transfer in tx['tokenTransfers'] 
+                    if transfer.get('mint') == target_token
+                ]
+
+            # Skip if no target token transfers
+            if not target_transfers:
+                continue
+
+            # Sum up total token amount and SOL amount for this transaction
+            token_amount = sum(float(transfer.get('tokenAmount', 0)) for transfer in target_transfers)
             sol_amount = self._get_sol_amount(tx)
 
+            # Calculate prices only if we have valid amounts
             price_in_sol = 0
             price_in_usd = 0
             market_cap = 0
 
-            if token_amount > 0:
+            if token_amount > 0 and sol_amount > 0:
                 price_in_sol = sol_amount / token_amount
                 price_in_usd = price_in_sol * self.sol_price
-                market_cap = self.total_supply * price_in_usd
+                # Calculate market cap based on circulating supply rather than total
+                market_cap = price_in_usd * self.total_supply
 
             price_history.append({
                 'timestamp': tx['timestamp'],
@@ -107,18 +122,49 @@ class HeliusTransformerV2:
 
         return price_history
 
-    def _get_token_amount(self, tx: Dict) -> float:
-        """Extract token amount from transaction with zero handling"""
+    def _get_token_amount(self, tx: Dict, target_token: str = None) -> float:
+        """Extract token amount from transaction with target token filtering"""
         if 'tokenTransfers' in tx and tx['tokenTransfers']:
-            amount = float(tx['tokenTransfers'][0].get('tokenAmount', 0))
-            return amount if amount > 0 else 0
+            if target_token:
+                # Sum amounts only for target token transfers
+                return sum(
+                    float(transfer.get('tokenAmount', 0)) 
+                    for transfer in tx['tokenTransfers']
+                    if transfer.get('mint') == target_token
+                )
+            else:
+                # If no target specified, use first transfer (legacy behavior)
+                return float(tx['tokenTransfers'][0].get('tokenAmount', 0))
         return 0
 
     def _get_sol_amount(self, tx: Dict) -> float:
-        """Extract SOL amount from transaction"""
+        """Extract SOL amount from transaction with enhanced Pump.fun detection"""
+        # Look for large SOL movements in account data first
+        if 'accountData' in tx:
+            significant_changes = []
+            for account in tx['accountData']:
+                balance_change = abs(float(account.get('nativeBalanceChange', 0)))
+                # Filter out small changes like fees
+                if balance_change > 1000000:  # 0.001 SOL threshold
+                    significant_changes.append(balance_change)
+
+            if significant_changes:
+                # Get the largest SOL movement
+                return max(significant_changes) / 1e9  # Convert lamports to SOL
+
+        # Fallback to native transfers for non-Pump.fun transactions
+        total_sol = 0
         if 'nativeTransfers' in tx:
-            return sum(float(nt['amount']) for nt in tx['nativeTransfers']) / 1e9
-        return 0
+            native_sol = sum(float(nt['amount']) for nt in tx['nativeTransfers']) / 1e9
+            total_sol += native_sol
+
+        if 'tokenTransfers' in tx:
+            for transfer in tx['tokenTransfers']:
+                if transfer.get('mint') == 'So11111111111111111111111111111111111111112':
+                    token_sol = float(transfer.get('tokenAmount', 0)) / 1e9
+                    total_sol += token_sol
+
+        return total_sol
 
     def _calculate_price_metrics(self, transactions: List[Dict]) -> Dict:
         """Calculate price metrics for a time window with zero handling"""
@@ -130,7 +176,7 @@ class HeliusTransformerV2:
                 token_amount = self._get_token_amount(tx)
                 sol_amount = self._get_sol_amount(tx)
 
-                if token_amount > 0:  # Only calculate price if token amount is non-zero
+                if token_amount > 0 and sol_amount > 0:  # Only calculate price if amounts are valid
                     price = sol_amount / token_amount
                     prices.append(price)
                     mcap = price * self.sol_price * self.total_supply
@@ -163,6 +209,7 @@ class HeliusTransformerV2:
             'valid_price_points': len(prices),
             'valid_mcap_points': len(mcaps)
         }
+
 
     def _calculate_supply_metrics(self, transactions: List[Dict]) -> Dict:
         """Calculate supply metrics for a time window"""
@@ -273,11 +320,29 @@ class HeliusTransformerV2:
             'avg_calls_per_program': np.mean(calls)
         }
 
+def log_filtered_transactions(filtered_tx, original_address, reason, log_dir):
+    """Log filtered transactions to a file"""
+    os.makedirs(log_dir, exist_ok=True)
+    log_file = os.path.join(log_dir, f"filtered_transactions_{original_address}.json")
+    
+    log_entry = {
+        "timestamp": filtered_tx['timestamp'],
+        "signature": filtered_tx['signature'],
+        "reason": reason,
+        "details": filtered_tx
+    }
+    
+    with open(log_file, 'a') as f:
+        json.dump(log_entry, f)
+        f.write('\n')  # Add a newline for readability
+
 def clean_transaction_data(transactions, 
-                         min_market_cap=4999,
-                         max_market_cap_allowed=64000,
-                         min_sol_amount=0.1,
-                         initial_seconds=10):
+                       original_address,
+                       log_dir,
+                       min_market_cap=4999,
+                       max_market_cap_allowed=80000,
+                       min_sol_amount=0.01,  # Changed from 0.1 to 0.01
+                       initial_seconds=10):
     
     # Sort transactions by timestamp
     transactions.sort(key=lambda x: x['timestamp'])
@@ -289,8 +354,12 @@ def clean_transaction_data(transactions,
     max_market_cap = 0
     
     for tx in transactions:
-        # Skip transactions with too little SOL or zero token amount
-        if tx['sol_amount'] < min_sol_amount or tx['token_amount'] <= 0:
+        # Log and skip transactions with too little SOL or zero token amount
+        if tx['sol_amount'] < min_sol_amount:
+            log_filtered_transactions(tx, original_address, "Insufficient SOL amount", log_dir)
+            continue
+        if tx['token_amount'] <= 0:
+            log_filtered_transactions(tx, original_address, "Zero token amount", log_dir)
             continue
             
         # If transaction is within initial_seconds of first transaction,
@@ -304,6 +373,8 @@ def clean_transaction_data(transactions,
             cleaned_transactions.append(tx)
             # Update max_market_cap
             max_market_cap = max(max_market_cap, tx['market_cap'])
+        else:
+            log_filtered_transactions(tx, original_address, "Market cap out of range", log_dir)
     
     # If we have no valid transactions after cleaning, return dummy data
     if not cleaned_transactions:
@@ -311,9 +382,10 @@ def clean_transaction_data(transactions,
     
     return cleaned_transactions, max_market_cap
 
-def convert_helius_data_v2(input_dir: str = 'all', output_dir: str = 'yes'):
+def convert_helius_data_v2(input_dir: str = 'all', output_dir: str = 'yes', log_dir: str = 'test'):
     """Convert Helius transaction data from input directory to price history and enhanced metrics"""
     os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(log_dir, exist_ok=True)
     transformer = HeliusTransformerV2()
 
     for filename in os.listdir(input_dir):
@@ -369,7 +441,7 @@ def convert_helius_data_v2(input_dir: str = 'all', output_dir: str = 'yes'):
                     continue
 
                 # Clean and sort price history data
-                cleaned_price_history, max_market_cap = clean_transaction_data(price_history)
+                cleaned_price_history, max_market_cap = clean_transaction_data(price_history, original_address, log_dir)
                 if not cleaned_price_history:
                     print(f"No valid transactions after cleaning in {filename}")
                     continue
@@ -411,12 +483,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Convert Helius transaction data (V2)')
     parser.add_argument('--input', default='all', help='Input directory containing raw transaction files')
     parser.add_argument('--output', default='testt/yes', help='Output directory for converted files')
+    parser.add_argument('--log', default='test', help='Directory for logging filtered transactions')
 
     args = parser.parse_args()
 
     print(f"Converting files from {args.input} to {args.output}")
+    print(f"Logging filtered transactions to {args.log}")
     try:
-        convert_helius_data_v2(args.input, args.output)
+        convert_helius_data_v2(args.input, args.output, args.log)
     except Exception as e:
         print(f"Fatal error during conversion: {str(e)}")
         traceback.print_exc()
