@@ -79,48 +79,30 @@ class HeliusTransformerV2:
         return price_history, enhanced_data
 
     def _generate_price_history(self, transactions: List[Dict], target_token: str) -> List[Dict]:
-        """Generate price history for all transactions of the target token"""
+        """Generate price history with accurate market cap calculation"""
         price_history = []
+
         for tx in transactions:
-            # Extract only transfers of our target token
-            target_transfers = []
-            if 'tokenTransfers' in tx:
-                target_transfers = [
-                    transfer for transfer in tx['tokenTransfers'] 
-                    if transfer.get('mint') == target_token
-                ]
-
-            # Skip if no target token transfers
-            if not target_transfers:
-                continue
-
-            # Sum up total token amount and SOL amount for this transaction
-            token_amount = sum(float(transfer.get('tokenAmount', 0)) for transfer in target_transfers)
-            sol_amount = self._get_sol_amount(tx)
-
-            # Calculate prices only if we have valid amounts
-            price_in_sol = 0
-            price_in_usd = 0
-            market_cap = 0
+            sol_amount, token_amount = self._calculate_precise_small_trade(tx, target_token)
 
             if token_amount > 0 and sol_amount > 0:
                 price_in_sol = sol_amount / token_amount
                 price_in_usd = price_in_sol * self.sol_price
-                # Calculate market cap based on circulating supply rather than total
                 market_cap = price_in_usd * self.total_supply
 
-            price_history.append({
-                'timestamp': tx['timestamp'],
-                'date': datetime.fromtimestamp(tx['timestamp']).strftime('%Y-%m-%d %H:%M:%S'),
-                'token_amount': token_amount,
-                'sol_amount': sol_amount,
-                'price_in_sol': price_in_sol,
-                'price_in_usd': price_in_usd,
-                'market_cap': market_cap,
-                'signature': tx['signature']
-            })
+                price_history.append({
+                    'timestamp': tx['timestamp'],
+                    'date': datetime.fromtimestamp(tx['timestamp']).strftime('%Y-%m-%d %H:%M:%S'),
+                    'token_amount': token_amount,
+                    'sol_amount': sol_amount,
+                    'price_in_sol': price_in_sol,
+                    'price_in_usd': price_in_usd,
+                    'market_cap': market_cap,
+                    'signature': tx['signature']
+                })
 
         return price_history
+
 
     def _get_token_amount(self, tx: Dict, target_token: str = None) -> float:
         """Extract token amount from transaction with target token filtering"""
@@ -136,35 +118,93 @@ class HeliusTransformerV2:
                 # If no target specified, use first transfer (legacy behavior)
                 return float(tx['tokenTransfers'][0].get('tokenAmount', 0))
         return 0
+    
+    def _calculate_precise_small_trade(self, tx: Dict, target_token: str) -> tuple[float, float]:
+        """
+        Calculate precise SOL amount and token amount for bot trades
+        Returns (sol_amount, token_amount)
+        """
+        actual_sol_amount = 0
+        actual_token_amount = 0
+    
+        # Get token amount from token transfers
+        if 'tokenTransfers' in tx:
+            target_transfers = [t for t in tx['tokenTransfers'] 
+                              if t.get('mint') == target_token]
+            if target_transfers:
+                actual_token_amount = float(target_transfers[0].get('tokenAmount', 0))
+    
+        # For bot trading patterns, we need to look at specific transfer patterns
+        if 'nativeTransfers' in tx:
+            # First, look for transfer to original seller (typically around 0.01-0.02 SOL)
+            trading_transfers = []
+            for transfer in tx['nativeTransfers']:
+                amount = float(transfer['amount']) / 1e9  # Convert lamports to SOL
+                # Filter transfers in the typical bot trading range (0.005-0.05 SOL)
+                if 0.005 <= amount <= 0.05:
+                    trading_transfers.append(amount)
+    
+            if trading_transfers:
+                # For bot trades, use the most likely trading amount
+                actual_sol_amount = max(trading_transfers)  # Usually the largest in the valid range
+            else:
+                # Fallback: Look for any reasonable trading amount
+                all_transfers = [
+                    float(t['amount']) / 1e9 
+                    for t in tx['nativeTransfers'] 
+                    if float(t['amount']) / 1e9 >= 0.001  # Minimum threshold
+                ]
+                if all_transfers:
+                    # Use the most likely trading amount
+                    actual_sol_amount = min(t for t in all_transfers if t >= 0.001)
+    
+        return actual_sol_amount, actual_token_amount
 
     def _get_sol_amount(self, tx: Dict) -> float:
-        """Extract SOL amount from transaction with enhanced Pump.fun detection"""
-        # Look for large SOL movements in account data first
-        if 'accountData' in tx:
-            significant_changes = []
-            for account in tx['accountData']:
-                balance_change = abs(float(account.get('nativeBalanceChange', 0)))
-                # Filter out small changes like fees
-                if balance_change > 1000000:  # 0.001 SOL threshold
-                    significant_changes.append(balance_change)
+        """Extract SOL amount for standard trades"""
+        try:
+            if 'nativeTransfers' in tx:
+                fee = float(tx.get('fee', 0)) / 1e9
 
-            if significant_changes:
-                # Get the largest SOL movement
-                return max(significant_changes) / 1e9  # Convert lamports to SOL
+                # First try to identify the bonding curve transfer
+                # These usually go to addresses containing 'Curve' or specific program addresses
+                bonding_transfers = []
+                for nt in tx['nativeTransfers']:
+                    amount = float(nt['amount']) / 1e9
+                    if amount > 0.005 and abs(amount - fee) > 0.000001:
+                        # Look for transfers to bonding curve or program accounts
+                        if 'toUserAccount' in nt:
+                            bonding_transfers.append(amount)
 
-        # Fallback to native transfers for non-Pump.fun transactions
-        total_sol = 0
-        if 'nativeTransfers' in tx:
-            native_sol = sum(float(nt['amount']) for nt in tx['nativeTransfers']) / 1e9
-            total_sol += native_sol
+                # If we found bonding curve transfers, use the most likely swap amount
+                if bonding_transfers:
+                    # For pump trades, the actual swap is usually between 0.01-0.02 SOL
+                    # Filter to this range if such transfers exist
+                    swap_range_transfers = [t for t in bonding_transfers if 0.008 <= t <= 0.025]
+                    if swap_range_transfers:
+                        return min(swap_range_transfers)
+                    # If no transfers in the typical range, take the smallest valid transfer
+                    return min(bonding_transfers)
 
-        if 'tokenTransfers' in tx:
-            for transfer in tx['tokenTransfers']:
-                if transfer.get('mint') == 'So11111111111111111111111111111111111111112':
-                    token_sol = float(transfer.get('tokenAmount', 0)) / 1e9
-                    total_sol += token_sol
+            # Fallback to wrapped SOL check
+            if 'tokenTransfers' in tx:
+                wrapped_transfers = [
+                    float(t.get('tokenAmount', 0))
+                    for t in tx['tokenTransfers']
+                    if t.get('mint') == 'So11111111111111111111111111111111111111112'
+                    and float(t.get('tokenAmount', 0)) >= 0.008  # Minimum threshold
+                ]
+                if wrapped_transfers:
+                    # Same logic - prefer amounts in the typical range
+                    swap_range_transfers = [t for t in wrapped_transfers if 0.008 <= t <= 0.025]
+                    if swap_range_transfers:
+                        return min(swap_range_transfers)
+                    return min(wrapped_transfers)
 
-        return total_sol
+        except Exception as e:
+            print(f"Error in _get_sol_amount: {str(e)}")
+
+        return 0
 
     def _calculate_price_metrics(self, transactions: List[Dict]) -> Dict:
         """Calculate price metrics for a time window with zero handling"""
@@ -337,12 +377,12 @@ def log_filtered_transactions(filtered_tx, original_address, reason, log_dir):
         f.write('\n')  # Add a newline for readability
 
 def clean_transaction_data(transactions, 
-                       original_address,
-                       log_dir,
-                       min_market_cap=4999,
-                       max_market_cap_allowed=80000,
-                       min_sol_amount=0.01,  # Changed from 0.1 to 0.01
-                       initial_seconds=10):
+                           original_address,
+                           log_dir,
+                           min_market_cap=4999,
+                           max_market_cap_allowed=100000,  # Increased to allow for higher caps
+                           min_sol_amount=0.0039,  # Lowered to catch smaller trades
+                           initial_seconds=10):
     
     # Sort transactions by timestamp
     transactions.sort(key=lambda x: x['timestamp'])
