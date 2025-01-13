@@ -1,0 +1,225 @@
+[2024-11-12 04:42:51] Starting continuous pipeline for coin address: HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump
+[2024-11-12 04:42:51] 
+=== Starting iteration 1 ===
+[2024-11-12 04:42:51] 
+Step 1: Running jupyterV2.py...
+[2024-11-12 04:43:05] Transaction file updated: transactions_HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump.json (9154.8 KB)
+[2024-11-12 04:43:05] 
+Step 2: Running convertV2.py...
+[2024-11-12 04:43:06] Generated files:
+[2024-11-12 04:43:06] Enhanced: enhanced_HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump_68915.json
+[2024-11-12 04:43:06] Price history: price_history_HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump_68915.json
+[2024-11-12 04:43:06] 
+Step 3: Moving files to pameligo directory...
+[2024-11-12 04:43:06] Files moved successfully to pameligo directory
+[2024-11-12 04:43:06] 
+Step 4: Running PredictorV3...
+[2024-11-12 04:43:09] Prediction completed successfully
+[2024-11-12 04:43:09] Loading data completed...
+Price data shape: (31, 8)
+Enhanced data shape: (25, 3)
+
+Price data columns: ['timestamp', 'date', 'token_amount', 'sol_amount', 'price_in_sol', 'price_in_usd', 'market_cap', 'signature']
+Created 12 windows
+Analyzed 10 windows...
+
+=== Market Cap Predictions (12 windows) ===
+
+Window 1:
+Time: 2024-11-12 04:34:19 to 2024-11-12 04:34:29
+Market Cap: $5,000.00
+Prediction: PUMP (79.7%)
+Actual Outcome: PUMP
+Max Future MCap: $68,915.00
+
+Window 2:
+Time: 2024-11-12 04:34:39 to 2024-11-12 04:34:49
+Market Cap: $36,423.28
+Prediction: NO PUMP (42.8%)
+Actual Outcome: PUMP
+Max Future MCap: $68,915.00
+
+Window 3:
+Time: 2024-11-12 04:34:49 to 2024-11-12 04:34:59
+Market Cap: $44,443.09
+Prediction: NO PUMP (6.5%)
+Actual Outcome: PUMP
+Max Future MCap: $68,915.00
+
+Window 4:
+Time: 2024-11-12 04:34:59 to 2024-11-12 04:35:09
+Market Cap: $36,326.08
+Prediction: NO PUMP (7.1%)
+Actual Outcome: PUMP
+Max Future MCap: $68,915.00
+
+Window 5:
+Time: 2024-11-12 04:35:59 to 2024-11-12 04:36:09
+Market Cap: $38,090.51
+Prediction: PUMP (56.9%)
+Actual Outcome: PUMP
+Max Future MCap: $68,915.00
+
+Window 6:
+Time: 2024-11-12 04:36:09 to 2024-11-12 04:36:19
+Market Cap: $60,896.00
+Prediction: NO PUMP (38.3%)
+Actual Outcome: NO PUMP
+Max Future MCap: $68,915.00
+
+Window 7:
+Time: 2024-11-12 04:36:19 to 2024-11-12 04:36:29
+Market Cap: $39,528.18
+Prediction: NO PUMP (13.0%)
+Actual Outcome: NO PUMP
+Max Future MCap: $46,094.83
+
+Window 8:
+Time: 2024-11-12 04:36:29 to 2024-11-12 04:36:39
+Market Cap: $68,915.00
+Prediction: NO PUMP (2.2%)
+Actual Outcome: NO PUMP
+Max Future MCap: $46,094.83
+
+Window 9:
+Time: 2024-11-12 04:36:39 to 2024-11-12 04:36:49
+Market Cap: $40,382.64
+Prediction: PUMP (74.6%)
+Actual Outcome: NO PUMP
+Max Future MCap: $46,094.83
+
+Window 10:
+Time: 2024-11-12 04:36:59 to 2024-11-12 04:37:09
+Market Cap: $41,249.47
+Prediction: PUMP (70.3%)
+Actual Outcome: NO PUMP
+Max Future MCap: $46,094.83
+
+Window 11:
+Time: 2024-11-12 04:38:19 to 2024-11-12 04:38:29
+Market Cap: $45,362.44
+Prediction: NO PUMP (5.8%)
+Actual Outcome: NO PUMP
+Max Future MCap: $46,094.83
+
+Window 12:
+Time: 2024-11-12 04:38:29 to 2024-11-12 04:38:39
+Market Cap: $46,094.83
+Prediction: PUMP (86.5%)
+Prediction Accuracy: 54.5%
+
+[2024-11-12 04:43:09] === Completed iteration 1 ===
+[2024-11-12 04:43:09] Waiting 30 seconds before next iteration...
+[2024-11-12 04:43:15] 
+=== Starting iteration 2 ===
+[2024-11-12 04:43:15] 
+Step 1: Running jupyterV2.py...
+[2024-11-12 04:43:17] Transaction file updated: transactions_HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump.json (9324.5 KB)
+[2024-11-12 04:43:17] 
+Step 2: Running convertV2.py...
+[2024-11-12 04:43:18] Generated files:
+[2024-11-12 04:43:18] Enhanced: enhanced_HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump_68915.json
+[2024-11-12 04:43:18] Price history: price_history_HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump_68915.json
+[2024-11-12 04:43:18] 
+Step 3: Moving files to pameligo directory...
+[2024-11-12 04:43:18] Files moved successfully to pameligo directory
+[2024-11-12 04:43:18] 
+Step 4: Running PredictorV3...
+[2024-11-12 04:43:20] Prediction completed successfully
+[2024-11-12 04:43:20] Loading data completed...
+Price data shape: (31, 8)
+Enhanced data shape: (25, 3)
+
+Price data columns: ['timestamp', 'date', 'token_amount', 'sol_amount', 'price_in_sol', 'price_in_usd', 'market_cap', 'signature']
+Created 12 windows
+Analyzed 10 windows...
+
+=== Market Cap Predictions (12 windows) ===
+
+Window 1:
+Time: 2024-11-12 04:34:19 to 2024-11-12 04:34:29
+Market Cap: $5,000.00
+Prediction: PUMP (79.7%)
+Actual Outcome: PUMP
+Max Future MCap: $68,915.00
+
+Window 2:
+Time: 2024-11-12 04:34:39 to 2024-11-12 04:34:49
+Market Cap: $36,423.28
+Prediction: NO PUMP (42.8%)
+Actual Outcome: PUMP
+Max Future MCap: $68,915.00
+
+Window 3:
+Time: 2024-11-12 04:34:49 to 2024-11-12 04:34:59
+Market Cap: $44,443.09
+Prediction: NO PUMP (6.5%)
+Actual Outcome: PUMP
+Max Future MCap: $68,915.00
+
+Window 4:
+Time: 2024-11-12 04:34:59 to 2024-11-12 04:35:09
+Market Cap: $36,326.08
+Prediction: NO PUMP (7.1%)
+Actual Outcome: PUMP
+Max Future MCap: $68,915.00
+
+Window 5:
+Time: 2024-11-12 04:35:59 to 2024-11-12 04:36:09
+Market Cap: $38,090.51
+Prediction: PUMP (56.9%)
+Actual Outcome: PUMP
+Max Future MCap: $68,915.00
+
+Window 6:
+Time: 2024-11-12 04:36:09 to 2024-11-12 04:36:19
+Market Cap: $60,896.00
+Prediction: NO PUMP (38.3%)
+Actual Outcome: NO PUMP
+Max Future MCap: $68,915.00
+
+Window 7:
+Time: 2024-11-12 04:36:19 to 2024-11-12 04:36:29
+Market Cap: $39,528.18
+Prediction: NO PUMP (13.0%)
+Actual Outcome: NO PUMP
+Max Future MCap: $46,094.83
+
+Window 8:
+Time: 2024-11-12 04:36:29 to 2024-11-12 04:36:39
+Market Cap: $68,915.00
+Prediction: NO PUMP (2.2%)
+Actual Outcome: NO PUMP
+Max Future MCap: $46,094.83
+
+Window 9:
+Time: 2024-11-12 04:36:39 to 2024-11-12 04:36:49
+Market Cap: $40,382.64
+Prediction: PUMP (74.6%)
+Actual Outcome: NO PUMP
+Max Future MCap: $46,094.83
+
+Window 10:
+Time: 2024-11-12 04:36:59 to 2024-11-12 04:37:09
+Market Cap: $41,249.47
+Prediction: PUMP (70.3%)
+Actual Outcome: NO PUMP
+Max Future MCap: $46,094.83
+
+Window 11:
+Time: 2024-11-12 04:38:19 to 2024-11-12 04:38:29
+Market Cap: $45,362.44
+Prediction: NO PUMP (5.8%)
+Actual Outcome: NO PUMP
+Max Future MCap: $46,094.83
+
+Window 12:
+Time: 2024-11-12 04:38:29 to 2024-11-12 04:38:39
+Market Cap: $46,094.83
+Prediction: PUMP (86.5%)
+Prediction Accuracy: 54.5%
+
+[2024-11-12 04:43:20] === Completed iteration 2 ===
+[2024-11-12 04:43:20] Waiting 30 seconds before next iteration...
+[2024-11-12 04:43:24] 
+Pipeline stopped by user

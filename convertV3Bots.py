@@ -6,7 +6,7 @@ import os
 from typing import Dict, List, Any
 
 class BotTradeTransformer:
-    def __init__(self, sol_price: float = 213.0):
+    def __init__(self, sol_price: float = 240.0):
         self.sol_price = sol_price
         self.total_supply = 1_000_000_000
         

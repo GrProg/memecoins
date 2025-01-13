@@ -1,0 +1,54 @@
+[
+  {
+    "timestamp": 1731404029,
+    "end_timestamp": 1731404039,
+    "window_metrics": {
+      "price_metrics": {
+        "price_start": 1.3535661514643155e-07,
+        "price_end": 1.0000059670000002e-09,
+        "price_change": -99.26120643167813,
+        "price_volatility": 4.357512371063678e-08,
+        "mcap_change": -99.26120643167813,
+        "mcap_volatility": 9586.527216340091,
+        "valid_price_points": 5,
+        "valid_mcap_points": 5
+      },
+      "supply_metrics": {
+        "burn_count": 0,
+        "mint_count": 0,
+        "total_burned": 0,
+        "total_minted": 0,
+        "net_supply_change": 0
+      },
+      "transaction_metrics": {
+        "transfer_count": 5,
+        "total_transactions": 5,
+        "unique_accounts": 49,
+        "tx_density": 0.5
+      },
+      "sol_metrics": {
+        "total_sol_volume": 13.052318629,
+        "avg_sol_per_tx": 2.6104637258,
+        "sol_tx_count": 5,
+        "sol_flow_volatility": 1.0515465425865096
+      },
+      "account_metrics": {
+        "total_accounts": 49,
+        "avg_interactions_per_account": 1.9795918367346939,
+        "max_account_interactions": 5,
+        "interaction_concentration": 1.7201067351596309
+      },
+      "fee_metrics": {
+        "total_fees": 0.00015199999999999998,
+        "avg_fee": 3.0399999999999997e-05,
+        "max_fee": 3.4e-05,
+        "fee_volatility": 4.586937976471886e-06
+      },
+      "program_metrics": {
+        "unique_programs": 6,
+        "total_program_calls": 182,
+        "avg_calls_per_program": 30.333333333333332
+      }
+    }
+  }
+]

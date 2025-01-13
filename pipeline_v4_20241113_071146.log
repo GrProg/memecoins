@@ -1,0 +1,18 @@
+[2024-11-13 07:11:46] Starting pipeline for coin address: HzZNSeXyArtouxkxUZwx7sSo1UpHkjoYfb5iVMqMpump
+[2024-11-13 07:11:46] 
+Step 1: Running jupyterV2.py...
+[2024-11-13 07:11:49] Transaction file created: transactions_HzZNSeXyArtouxkxUZwx7sSo1UpHkjoYfb5iVMqMpump.json (1384.0 KB)
+[2024-11-13 07:11:49] 
+Step 2: Running convertV3Bots.py...
+[2024-11-13 07:11:50] Generated files:
+[2024-11-13 07:11:50] Enhanced: enhanced_HzZNSeXyArtouxkxUZwx7sSo1UpHkjoYfb5iVMqMpump_37586.json
+[2024-11-13 07:11:50] Price history: price_history_HzZNSeXyArtouxkxUZwx7sSo1UpHkjoYfb5iVMqMpump_37586.json
+[2024-11-13 07:11:50] 
+Step 3: Copying files to botfucker/giatora...
+[2024-11-13 07:11:50] Files copied successfully to botfucker/giatora directory
+[2024-11-13 07:11:50] 
+Step 4: Running rename.py...
+[2024-11-13 07:11:50] File renamed successfully
+[2024-11-13 07:11:50] Error processing file: [WinError 183] Cannot create a file when that file already exists: 'giatora\\price_history_HzZNSeXyArtouxkxUZwx7sSo1UpHkjoYfb5iVMqMpump_37586.json' -> 'giatora\\price_history_HzZNSeXyArtouxkxUZwx7sSo1UpHkjoYfb5iVMqMpump_37586_13.41_63_9.json'
+
+[2024-11-13 07:11:50] Pipeline completed successfully!

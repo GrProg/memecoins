@@ -41,4 +41,4 @@ def setup_helius_webhook(token_address: str):
         return None
 if __name__ == "__main__":
     #token_address = input("Enter token address to monitor: ")
-    setup_helius_webhook("7wbiW1XuGD77F4tSDWyMu73bJKwWX4zKwDfjdPRMpump")
+    setup_helius_webhook("CJduScRXPGpkT3oKuu2mNny5Do9vzL46guxXwAP4pump")

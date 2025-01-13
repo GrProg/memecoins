@@ -1,0 +1,136 @@
+[2024-11-12 04:50:05] Starting continuous pipeline for coin address: HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump
+[2024-11-12 04:50:05] 
+=== Starting iteration 1 ===
+[2024-11-12 04:50:05] 
+Step 1: Running jupyterV2.py...
+[2024-11-12 04:50:36] Transaction file updated: transactions_HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump.json (8133.0 KB)
+[2024-11-12 04:50:36] 
+Step 2: Running convertV2.py...
+[2024-11-12 04:50:37] Generated files:
+[2024-11-12 04:50:37] Enhanced: enhanced_HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump_56299.json
+[2024-11-12 04:50:37] Price history: price_history_HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump_56299.json
+[2024-11-12 04:50:37] 
+Step 3: Moving files to pameligo directory...
+[2024-11-12 04:50:37] Files moved successfully to pameligo directory
+[2024-11-12 04:50:37] 
+Step 4: Running PredictorV3...
+[2024-11-12 04:50:40] Prediction completed successfully
+[2024-11-12 04:50:40] Loading data completed...
+Price data shape: (32, 8)
+Enhanced data shape: (44, 3)
+
+Price data columns: ['timestamp', 'date', 'token_amount', 'sol_amount', 'price_in_sol', 'price_in_usd', 'market_cap', 'signature']
+Created 13 windows
+Analyzed 10 windows...
+
+=== Market Cap Predictions (13 windows) ===
+
+Window 1:
+Time: 2024-11-12 04:39:53 to 2024-11-12 04:40:03
+Market Cap: $5,000.00
+Prediction: PUMP (57.3%)
+Actual Outcome: PUMP
+Max Future MCap: $56,299.15
+
+Window 2:
+Time: 2024-11-12 04:40:03 to 2024-11-12 04:40:13
+Market Cap: $5,000.00
+Prediction: PUMP (65.0%)
+Actual Outcome: PUMP
+Max Future MCap: $56,299.15
+
+Window 3:
+Time: 2024-11-12 04:40:13 to 2024-11-12 04:40:23
+Market Cap: $49,653.68
+Prediction: NO PUMP (46.7%)
+Actual Outcome: NO PUMP
+Max Future MCap: $56,299.15
+
+Window 4:
+Time: 2024-11-12 04:40:23 to 2024-11-12 04:40:33
+Market Cap: $50,486.68
+Prediction: NO PUMP (5.0%)
+Actual Outcome: NO PUMP
+Max Future MCap: $56,299.15
+
+Window 5:
+Time: 2024-11-12 04:40:33 to 2024-11-12 04:40:43
+Market Cap: $50,821.47
+Prediction: NO PUMP (12.6%)
+Actual Outcome: NO PUMP
+Max Future MCap: $56,299.15
+
+Window 6:
+Time: 2024-11-12 04:41:13 to 2024-11-12 04:41:23
+Market Cap: $51,023.72
+Prediction: NO PUMP (21.3%)
+Actual Outcome: NO PUMP
+Max Future MCap: $56,299.15
+
+Window 7:
+Time: 2024-11-12 04:41:33 to 2024-11-12 04:41:43
+Market Cap: $51,528.22
+Prediction: NO PUMP (3.2%)
+Actual Outcome: NO PUMP
+Max Future MCap: $56,299.15
+
+Window 8:
+Time: 2024-11-12 04:43:13 to 2024-11-12 04:43:23
+Market Cap: $9,747.52
+Prediction: NO PUMP (1.7%)
+Actual Outcome: PUMP
+Max Future MCap: $56,299.15
+
+Window 9:
+Time: 2024-11-12 04:43:53 to 2024-11-12 04:44:03
+Market Cap: $54,052.04
+Prediction: NO PUMP (6.2%)
+Actual Outcome: NO PUMP
+Max Future MCap: $56,299.15
+
+Window 10:
+Time: 2024-11-12 04:45:13 to 2024-11-12 04:45:23
+Market Cap: $55,539.58
+Prediction: NO PUMP (6.1%)
+Actual Outcome: NO PUMP
+Max Future MCap: $56,299.15
+
+Window 11:
+Time: 2024-11-12 04:45:33 to 2024-11-12 04:45:43
+Market Cap: $55,774.01
+Prediction: NO PUMP (7.7%)
+Actual Outcome: NO PUMP
+Max Future MCap: $56,299.15
+
+Window 12:
+Time: 2024-11-12 04:45:53 to 2024-11-12 04:46:03
+Market Cap: $56,299.15
+Prediction: NO PUMP (4.6%)
+Actual Outcome: NO PUMP
+Max Future MCap: $9,747.52
+
+Window 13:
+Time: 2024-11-12 04:47:03 to 2024-11-12 04:47:13
+Market Cap: $9,747.52
+Prediction: NO PUMP (1.0%)
+Prediction Accuracy: 91.7%
+
+[2024-11-12 04:50:40] === Completed iteration 1 ===
+[2024-11-12 04:50:40] Waiting 30 seconds before next iteration...
+[2024-11-12 04:50:45] 
+=== Starting iteration 2 ===
+[2024-11-12 04:50:45] 
+Step 1: Running jupyterV2.py...
+[2024-11-12 04:50:47] Transaction file updated: transactions_HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump.json (8882.3 KB)
+[2024-11-12 04:50:47] 
+Step 2: Running convertV2.py...
+[2024-11-12 04:50:51] Generated files:
+[2024-11-12 04:50:51] Enhanced: enhanced_HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump_56299.json
+[2024-11-12 04:50:51] Price history: price_history_HsDtTdJS2RUDKSRVU9CFTwy8dJdsKed9zmD3fwHNpump_56299.json
+[2024-11-12 04:50:51] 
+Step 3: Moving files to pameligo directory...
+[2024-11-12 04:50:51] Files moved successfully to pameligo directory
+[2024-11-12 04:50:51] 
+Step 4: Running PredictorV3...
+[2024-11-12 04:50:53] 
+Pipeline stopped by user

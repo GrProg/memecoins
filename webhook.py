@@ -156,10 +156,9 @@ def health():
 @app.route('/webhook', methods=['POST'])
 def webhook():
     """Main webhook endpoint for receiving transaction data"""
-    TARGET_TOKEN = "7wbiW1XuGD77F4tSDWyMu73bJKwWX4zKwDfjdPRMpump"  # Make sure this is your token
+    TARGET_TOKEN = "Gh44uRQQSpKrYpgufCwPKVs3MYzHwV6APHzsotVMpump"
     
     logger.info("Received webhook request")
-    logger.info(f"Headers: {dict(request.headers)}")
     
     try:
         # Get the data and log it
@@ -167,14 +166,6 @@ def webhook():
         if not data:
             logger.error("No data received")
             return jsonify({"status": "error", "message": "No data received"}), 400
-
-        # Save raw webhook data for debugging
-        debug_dir = 'debug'
-        os.makedirs(debug_dir, exist_ok=True)
-        debug_file = os.path.join(debug_dir, f'webhook_{datetime.now().strftime("%H%M%S")}.json')
-        with open(debug_file, 'w') as f:
-            json.dump(data, f, indent=2)
-        logger.info(f"Saved raw webhook data to {debug_file}")
 
         # Find all transactions in this block of data
         transactions = data if isinstance(data, list) else [data]
@@ -193,7 +184,28 @@ def webhook():
                 # Check if any transfer involves our target token
                 for transfer in token_transfers:
                     if transfer.get('mint') == TARGET_TOKEN:
-                        # Use transaction manager to save
+                        # Print transaction details immediately
+                        print("\n" + "="*50)
+                        print(f"🔔 NEW TRANSACTION DETECTED!")
+                        print(f"Type: {tx.get('type')}")
+                        print(f"Time: {datetime.fromtimestamp(tx.get('timestamp', 0)).strftime('%H:%M:%S')}")
+                        print(f"Amount: {transfer.get('tokenAmount', 'Unknown')}")
+                        
+                        # If there's a price, show it
+                        if 'nativeTransfers' in tx:
+                            sol_amount = sum(nt['amount'] for nt in tx['nativeTransfers']) / 1e9
+                            print(f"SOL Amount: {sol_amount:.4f} SOL")
+                            
+                            if transfer.get('tokenAmount'):
+                                token_amount = float(transfer.get('tokenAmount', 0))
+                                if token_amount > 0:
+                                    price = sol_amount / token_amount
+                                    print(f"Price: {price:.8f} SOL/token")
+                        
+                        print(f"Signature: {tx['signature'][:16]}...")
+                        print("="*50)
+                        
+                        # Save transaction
                         if tx_manager.save_transaction(TARGET_TOKEN, tx):
                             saved_count += 1
                             logger.info(f"Saved transaction {tx['signature'][:8]}")
@@ -206,7 +218,13 @@ def webhook():
             "timestamp": datetime.now().isoformat()
         }
         
-        logger.info(f"Webhook processing complete: {result}")
+        # Save debug data
+        debug_dir = 'debug'
+        os.makedirs(debug_dir, exist_ok=True)
+        debug_file = os.path.join(debug_dir, f'webhook_{datetime.now().strftime("%H%M%S")}.json')
+        with open(debug_file, 'w') as f:
+            json.dump(data, f, indent=2)
+        
         return jsonify(result), 200
         
     except Exception as e:
@@ -221,7 +239,7 @@ def test_webhook():
     return jsonify({
         "status": "webhook endpoint working",
         "time": datetime.now().isoformat(),
-        "target_token": "7wbiW1XuGD77F4tSDWyMu73bJKwWX4zKwDfjdPRMpump"
+        "target_token": "Gh44uRQQSpKrYpgufCwPKVs3MYzHwV6APHzsotVMpump"
     })
 
 @app.errorhandler(Exception)

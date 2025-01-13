@@ -11,7 +11,7 @@ def update_webhook():
     data = {
         "webhookURL": NEW_URL,
         "transactionTypes": ["ANY"],
-        "accountAddresses": ["HD9iNo8TAcAVuCzizj9W6XCotEyRiP7jaR3NxL4Hpump"],
+        "accountAddresses": ["CJduScRXPGpkT3oKuu2mNny5Do9vzL46guxXwAP4pump"],
         "webhookType": "enhanced"
     }
     

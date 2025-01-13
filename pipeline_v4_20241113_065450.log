@@ -1,0 +1,21 @@
+[2024-11-13 06:54:50] Starting pipeline for coin address: DQzN52TJW45eJh6mMyNss2EPoc4vnyPtJbSKFxG6j28h
+[2024-11-13 06:54:50] 
+Step 1: Running jupyterV2.py...
+[2024-11-13 06:55:05] Transaction file created: transactions_DQzN52TJW45eJh6mMyNss2EPoc4vnyPtJbSKFxG6j28h.json (286.1 KB)
+[2024-11-13 06:55:05] 
+Step 2: Running convertV3Bots.py...
+[2024-11-13 06:55:06] Generated files:
+[2024-11-13 06:55:06] Enhanced: enhanced_DQzN52TJW45eJh6mMyNss2EPoc4vnyPtJbSKFxG6j28h_20388.json
+[2024-11-13 06:55:06] Price history: price_history_DQzN52TJW45eJh6mMyNss2EPoc4vnyPtJbSKFxG6j28h_20388.json
+[2024-11-13 06:55:06] 
+Step 3: Copying files to botfucker/giatora...
+[2024-11-13 06:55:06] Files copied successfully to botfucker/giatora directory
+[2024-11-13 06:55:06] 
+Step 4: Running rename.py...
+[2024-11-13 06:55:06] File renamed successfully
+[2024-11-13 06:55:06] Successfully renamed file to: price_history_DQzN52TJW45eJh6mMyNss2EPoc4vnyPtJbSKFxG6j28h_20388_10.31_15_13.json
+Total SOL amount from special transactions: 10.31
+Total transactions: 15
+Special transactions (sol_amount not starting with 0.01): 13
+
+[2024-11-13 06:55:06] Pipeline completed successfully!

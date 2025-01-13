@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 class WebhookManager:
     def __init__(self):
         self.API_KEY = "30b8e7e2-9206-41ca-a392-112845774aef"
-        self.TOKEN_ADDRESS = "HD9iNo8TAcAVuCzizj9W6XCotEyRiP7jaR3NxL4Hpump"
+        self.TOKEN_ADDRESS = "Gh44uRQQSpKrYpgufCwPKVs3MYzHwV6APHzsotVMpump"
         self.current_webhook_id = None
         
     def check_flask_server(self) -> bool:
@@ -74,15 +74,19 @@ class WebhookManager:
             return False
 
     def create_webhook(self, webhook_url: str) -> bool:
-        """Create a new webhook"""
+        """Create new webhook with immediate historical data"""
         try:
             url = f"https://api.helius.xyz/v0/webhooks?api-key={self.API_KEY}"
             data = {
                 "webhookURL": webhook_url,
                 "transactionTypes": ["ANY"],
                 "accountAddresses": [self.TOKEN_ADDRESS],
-                "webhookType": "enhanced"
+                "webhookType": "enhanced",
+                "historical": True,  # Enable historical data
+                "startTime": int(time.time()) - 300,  # Last 5 minutes
+                "includePending": True  # Include pending transactions
             }
+            
             response = requests.post(url, json=data)
             if response.status_code == 200:
                 webhook_data = response.json()

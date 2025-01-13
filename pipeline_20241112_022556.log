@@ -1,0 +1,292 @@
+[2024-11-12 02:25:56] Starting continuous pipeline for coin address: EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump
+[2024-11-12 02:25:56] 
+=== Starting iteration 1 ===
+[2024-11-12 02:25:56] 
+Step 1: Running jupyterV2.py...
+[2024-11-12 02:26:02] Transaction file updated: transactions_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump.json (74.7 KB)
+[2024-11-12 02:26:02] 
+Step 2: Running convertV2.py...
+[2024-11-12 02:26:06] Generated files:
+[2024-11-12 02:26:06] Enhanced: enhanced_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump_25230.json
+[2024-11-12 02:26:06] Price history: price_history_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump_25230.json
+[2024-11-12 02:26:06] 
+Step 3: Moving files to pameligo directory...
+[2024-11-12 02:26:06] Files moved successfully to pameligo directory
+[2024-11-12 02:26:06] 
+Step 4: Running PredictorV3...
+[2024-11-12 02:26:08] Prediction completed successfully
+[2024-11-12 02:26:08] Loading data completed...
+Price data shape: (4, 8)
+Enhanced data shape: (3, 3)
+
+Price data columns: ['timestamp', 'date', 'token_amount', 'sol_amount', 'price_in_sol', 'price_in_usd', 'market_cap', 'signature']
+Created 3 windows
+
+=== Market Cap Predictions (3 windows) ===
+
+Window 1:
+Time: 2024-11-12 02:24:55 to 2024-11-12 02:25:05
+Market Cap: $5,000.00
+Prediction: PUMP (84.7%)
+Actual Outcome: PUMP
+Max Future MCap: $25,230.62
+
+Window 2:
+Time: 2024-11-12 02:25:15 to 2024-11-12 02:25:25
+Market Cap: $25,019.32
+Prediction: PUMP (76.8%)
+Actual Outcome: NO PUMP
+Max Future MCap: $25,230.62
+
+Window 3:
+Time: 2024-11-12 02:25:35 to 2024-11-12 02:25:45
+Market Cap: $25,230.62
+Prediction: PUMP (65.7%)
+Prediction Accuracy: 50.0%
+
+[2024-11-12 02:26:08] === Completed iteration 1 ===
+[2024-11-12 02:26:08] Waiting 30 seconds before next iteration...
+[2024-11-12 02:26:13] 
+=== Starting iteration 2 ===
+[2024-11-12 02:26:13] 
+Step 1: Running jupyterV2.py...
+[2024-11-12 02:26:16] Transaction file updated: transactions_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump.json (103.6 KB)
+[2024-11-12 02:26:16] 
+Step 2: Running convertV2.py...
+[2024-11-12 02:26:18] Generated files:
+[2024-11-12 02:26:18] Enhanced: enhanced_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump_25230.json
+[2024-11-12 02:26:18] Price history: price_history_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump_25230.json
+[2024-11-12 02:26:18] 
+Step 3: Moving files to pameligo directory...
+[2024-11-12 02:26:18] Files moved successfully to pameligo directory
+[2024-11-12 02:26:18] 
+Step 4: Running PredictorV3...
+[2024-11-12 02:26:21] Prediction completed successfully
+[2024-11-12 02:26:21] Loading data completed...
+Price data shape: (4, 8)
+Enhanced data shape: (3, 3)
+
+Price data columns: ['timestamp', 'date', 'token_amount', 'sol_amount', 'price_in_sol', 'price_in_usd', 'market_cap', 'signature']
+Created 3 windows
+
+=== Market Cap Predictions (3 windows) ===
+
+Window 1:
+Time: 2024-11-12 02:24:55 to 2024-11-12 02:25:05
+Market Cap: $5,000.00
+Prediction: PUMP (84.7%)
+Actual Outcome: PUMP
+Max Future MCap: $25,230.62
+
+Window 2:
+Time: 2024-11-12 02:25:15 to 2024-11-12 02:25:25
+Market Cap: $25,019.32
+Prediction: PUMP (76.8%)
+Actual Outcome: NO PUMP
+Max Future MCap: $25,230.62
+
+Window 3:
+Time: 2024-11-12 02:25:35 to 2024-11-12 02:25:45
+Market Cap: $25,230.62
+Prediction: PUMP (65.7%)
+Prediction Accuracy: 50.0%
+
+[2024-11-12 02:26:21] === Completed iteration 2 ===
+[2024-11-12 02:26:21] Waiting 30 seconds before next iteration...
+[2024-11-12 02:26:26] 
+=== Starting iteration 3 ===
+[2024-11-12 02:26:26] 
+Step 1: Running jupyterV2.py...
+[2024-11-12 02:26:31] Transaction file updated: transactions_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump.json (103.6 KB)
+[2024-11-12 02:26:31] 
+Step 2: Running convertV2.py...
+[2024-11-12 02:26:32] Generated files:
+[2024-11-12 02:26:32] Enhanced: enhanced_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump_25230.json
+[2024-11-12 02:26:32] Price history: price_history_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump_25230.json
+[2024-11-12 02:26:32] 
+Step 3: Moving files to pameligo directory...
+[2024-11-12 02:26:33] Files moved successfully to pameligo directory
+[2024-11-12 02:26:33] 
+Step 4: Running PredictorV3...
+[2024-11-12 02:26:35] Prediction completed successfully
+[2024-11-12 02:26:35] Loading data completed...
+Price data shape: (4, 8)
+Enhanced data shape: (4, 3)
+
+Price data columns: ['timestamp', 'date', 'token_amount', 'sol_amount', 'price_in_sol', 'price_in_usd', 'market_cap', 'signature']
+Created 3 windows
+
+=== Market Cap Predictions (3 windows) ===
+
+Window 1:
+Time: 2024-11-12 02:24:55 to 2024-11-12 02:25:05
+Market Cap: $5,000.00
+Prediction: PUMP (84.7%)
+Actual Outcome: PUMP
+Max Future MCap: $25,230.62
+
+Window 2:
+Time: 2024-11-12 02:25:15 to 2024-11-12 02:25:25
+Market Cap: $25,019.32
+Prediction: PUMP (76.8%)
+Actual Outcome: NO PUMP
+Max Future MCap: $25,230.62
+
+Window 3:
+Time: 2024-11-12 02:25:35 to 2024-11-12 02:25:45
+Market Cap: $25,230.62
+Prediction: PUMP (97.2%)
+Prediction Accuracy: 50.0%
+
+[2024-11-12 02:26:35] === Completed iteration 3 ===
+[2024-11-12 02:26:36] Waiting 30 seconds before next iteration...
+[2024-11-12 02:26:41] 
+=== Starting iteration 4 ===
+[2024-11-12 02:26:41] 
+Step 1: Running jupyterV2.py...
+[2024-11-12 02:26:43] Transaction file updated: transactions_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump.json (118.8 KB)
+[2024-11-12 02:26:43] 
+Step 2: Running convertV2.py...
+[2024-11-12 02:26:44] Generated files:
+[2024-11-12 02:26:44] Enhanced: enhanced_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump_25230.json
+[2024-11-12 02:26:44] Price history: price_history_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump_25230.json
+[2024-11-12 02:26:44] 
+Step 3: Moving files to pameligo directory...
+[2024-11-12 02:26:44] Files moved successfully to pameligo directory
+[2024-11-12 02:26:44] 
+Step 4: Running PredictorV3...
+[2024-11-12 02:26:47] Prediction completed successfully
+[2024-11-12 02:26:47] Loading data completed...
+Price data shape: (4, 8)
+Enhanced data shape: (4, 3)
+
+Price data columns: ['timestamp', 'date', 'token_amount', 'sol_amount', 'price_in_sol', 'price_in_usd', 'market_cap', 'signature']
+Created 3 windows
+
+=== Market Cap Predictions (3 windows) ===
+
+Window 1:
+Time: 2024-11-12 02:24:55 to 2024-11-12 02:25:05
+Market Cap: $5,000.00
+Prediction: PUMP (84.7%)
+Actual Outcome: PUMP
+Max Future MCap: $25,230.62
+
+Window 2:
+Time: 2024-11-12 02:25:15 to 2024-11-12 02:25:25
+Market Cap: $25,019.32
+Prediction: PUMP (76.8%)
+Actual Outcome: NO PUMP
+Max Future MCap: $25,230.62
+
+Window 3:
+Time: 2024-11-12 02:25:35 to 2024-11-12 02:25:45
+Market Cap: $25,230.62
+Prediction: PUMP (97.2%)
+Prediction Accuracy: 50.0%
+
+[2024-11-12 02:26:47] === Completed iteration 4 ===
+[2024-11-12 02:26:47] Waiting 30 seconds before next iteration...
+[2024-11-12 02:26:53] 
+=== Starting iteration 5 ===
+[2024-11-12 02:26:53] 
+Step 1: Running jupyterV2.py...
+[2024-11-12 02:26:55] Transaction file updated: transactions_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump.json (128.2 KB)
+[2024-11-12 02:26:55] 
+Step 2: Running convertV2.py...
+[2024-11-12 02:26:56] Generated files:
+[2024-11-12 02:26:56] Enhanced: enhanced_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump_25230.json
+[2024-11-12 02:26:56] Price history: price_history_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump_25230.json
+[2024-11-12 02:26:56] 
+Step 3: Moving files to pameligo directory...
+[2024-11-12 02:26:56] Files moved successfully to pameligo directory
+[2024-11-12 02:26:56] 
+Step 4: Running PredictorV3...
+[2024-11-12 02:26:58] Prediction completed successfully
+[2024-11-12 02:26:58] Loading data completed...
+Price data shape: (4, 8)
+Enhanced data shape: (4, 3)
+
+Price data columns: ['timestamp', 'date', 'token_amount', 'sol_amount', 'price_in_sol', 'price_in_usd', 'market_cap', 'signature']
+Created 3 windows
+
+=== Market Cap Predictions (3 windows) ===
+
+Window 1:
+Time: 2024-11-12 02:24:55 to 2024-11-12 02:25:05
+Market Cap: $5,000.00
+Prediction: PUMP (84.7%)
+Actual Outcome: PUMP
+Max Future MCap: $25,230.62
+
+Window 2:
+Time: 2024-11-12 02:25:15 to 2024-11-12 02:25:25
+Market Cap: $25,019.32
+Prediction: PUMP (76.8%)
+Actual Outcome: NO PUMP
+Max Future MCap: $25,230.62
+
+Window 3:
+Time: 2024-11-12 02:25:35 to 2024-11-12 02:25:45
+Market Cap: $25,230.62
+Prediction: PUMP (97.2%)
+Prediction Accuracy: 50.0%
+
+[2024-11-12 02:26:58] === Completed iteration 5 ===
+[2024-11-12 02:26:58] Waiting 30 seconds before next iteration...
+[2024-11-12 02:27:03] 
+=== Starting iteration 6 ===
+[2024-11-12 02:27:03] 
+Step 1: Running jupyterV2.py...
+[2024-11-12 02:27:08] Transaction file updated: transactions_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump.json (128.2 KB)
+[2024-11-12 02:27:08] 
+Step 2: Running convertV2.py...
+[2024-11-12 02:27:09] Generated files:
+[2024-11-12 02:27:09] Enhanced: enhanced_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump_25230.json
+[2024-11-12 02:27:09] Price history: price_history_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump_25230.json
+[2024-11-12 02:27:09] 
+Step 3: Moving files to pameligo directory...
+[2024-11-12 02:27:09] Files moved successfully to pameligo directory
+[2024-11-12 02:27:09] 
+Step 4: Running PredictorV3...
+[2024-11-12 02:27:12] Prediction completed successfully
+[2024-11-12 02:27:12] Loading data completed...
+Price data shape: (4, 8)
+Enhanced data shape: (4, 3)
+
+Price data columns: ['timestamp', 'date', 'token_amount', 'sol_amount', 'price_in_sol', 'price_in_usd', 'market_cap', 'signature']
+Created 3 windows
+
+=== Market Cap Predictions (3 windows) ===
+
+Window 1:
+Time: 2024-11-12 02:24:55 to 2024-11-12 02:25:05
+Market Cap: $5,000.00
+Prediction: PUMP (84.7%)
+Actual Outcome: PUMP
+Max Future MCap: $25,230.62
+
+Window 2:
+Time: 2024-11-12 02:25:15 to 2024-11-12 02:25:25
+Market Cap: $25,019.32
+Prediction: PUMP (76.8%)
+Actual Outcome: NO PUMP
+Max Future MCap: $25,230.62
+
+Window 3:
+Time: 2024-11-12 02:25:35 to 2024-11-12 02:25:45
+Market Cap: $25,230.62
+Prediction: PUMP (97.2%)
+Prediction Accuracy: 50.0%
+
+[2024-11-12 02:27:12] === Completed iteration 6 ===
+[2024-11-12 02:27:12] Waiting 30 seconds before next iteration...
+[2024-11-12 02:27:17] 
+=== Starting iteration 7 ===
+[2024-11-12 02:27:17] 
+Step 1: Running jupyterV2.py...
+[2024-11-12 02:27:20] Transaction file updated: transactions_EFQwuucBLGc9fMpbMqRG5Hu43oDnB3vzCcdGJEXipump.json (144.2 KB)
+[2024-11-12 02:27:20] 
+Step 2: Running convertV2.py...
+[2024-11-12 02:27:21] 
+Pipeline stopped by user

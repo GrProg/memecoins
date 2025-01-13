@@ -1,0 +1,94 @@
+[
+  {
+    "timestamp": 1731509627,
+    "end_timestamp": 1731509637,
+    "window_metrics": {
+      "price_metrics": {
+        "price_start": 5.724501397949818e-08,
+        "price_end": 9.181633179258265e-08,
+        "price_change": 60.39184098280751,
+        "price_volatility": 2.4453466556876792e-08,
+        "valid_price_points": 10
+      },
+      "volume_metrics": {
+        "total_sol_volume": 10.060133791999998,
+        "trade_count": 10,
+        "avg_trade_size": 1.0060133792
+      },
+      "participant_metrics": {
+        "unique_buyers": 7,
+        "unique_sellers": 1,
+        "total_participants": 8
+      }
+    }
+  },
+  {
+    "timestamp": 1731509646,
+    "end_timestamp": 1731509656,
+    "window_metrics": {
+      "price_metrics": {
+        "price_start": 9.200212772474082e-08,
+        "price_end": 9.225510242031677e-08,
+        "price_change": 0.27496613592765556,
+        "price_volatility": 1.7324909600708456e-10,
+        "valid_price_points": 3
+      },
+      "volume_metrics": {
+        "total_sol_volume": 0.199540869,
+        "trade_count": 3,
+        "avg_trade_size": 0.06651362300000001
+      },
+      "participant_metrics": {
+        "unique_buyers": 3,
+        "unique_sellers": 1,
+        "total_participants": 4
+      }
+    }
+  },
+  {
+    "timestamp": 1731509659,
+    "end_timestamp": 1731509669,
+    "window_metrics": {
+      "price_metrics": {
+        "price_start": 9.25927467764779e-08,
+        "price_end": 9.25927467764779e-08,
+        "price_change": 0.0,
+        "price_volatility": 0,
+        "valid_price_points": 1
+      },
+      "volume_metrics": {
+        "total_sol_volume": 0.049681165,
+        "trade_count": 1,
+        "avg_trade_size": 0.049681165
+      },
+      "participant_metrics": {
+        "unique_buyers": 1,
+        "unique_sellers": 1,
+        "total_participants": 2
+      }
+    }
+  },
+  {
+    "timestamp": 1731509676,
+    "end_timestamp": 1731509686,
+    "window_metrics": {
+      "price_metrics": {
+        "price_start": 9.267627041805779e-08,
+        "price_end": 9.267627041805779e-08,
+        "price_change": 0.0,
+        "price_volatility": 0,
+        "valid_price_points": 1
+      },
+      "volume_metrics": {
+        "total_sol_volume": 0.02,
+        "trade_count": 1,
+        "avg_trade_size": 0.02
+      },
+      "participant_metrics": {
+        "unique_buyers": 1,
+        "unique_sellers": 1,
+        "total_participants": 2
+      }
+    }
+  }
+]
